@@ -1,1 +1,4 @@
-int main(int, char *[]) { return 42; }
+auto main( int /*unused*/, char * /*unused*/[] ) -> int
+{
+  return 0;
+}

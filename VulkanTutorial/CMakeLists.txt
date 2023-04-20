@@ -6,11 +6,18 @@ project(VulkanTutorial)
 # using msys2 for instance.
 include(cmake/normalize_path.cmake)
 
-# Find Vulkan
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 find_package(Vulkan REQUIRED)
 
-# Add executable
 add_executable(VulkanTutorial main.cpp)
+
+target_compile_features(VulkanTutorial PRIVATE cxx_std_23)
+
+target_compile_options(VulkanTutorial PRIVATE -Wall -Wextra -Wshadow
+  -Wnon-virtual-dtor -pedantic -Wold-style-cast -Wcast-align -Wunused
+  -Woverloaded-virtual -Wconversion -Wdouble-promotion -Wformat=2
+  -Wimplicit-fallthrough)
 
 normalize_path($ENV{VULKAN_SDK}/lib/SDL2.lib SDL2_LIB_PATH)
 target_link_libraries(VulkanTutorial Vulkan::Vulkan ${SDL2_LIB_PATH})
