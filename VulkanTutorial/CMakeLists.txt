@@ -12,18 +12,8 @@ find_package(Vulkan REQUIRED)
 # Add executable
 add_executable(VulkanTutorial main.cpp)
 
-# Link with vulkan lib
-target_link_libraries(VulkanTutorial Vulkan::Vulkan)
-
-# Link with SDL2. TODO: check it works on non WIN32 platforms
 normalize_path($ENV{VULKAN_SDK}/lib/SDL2.lib SDL2_LIB_PATH)
-target_link_libraries(VulkanTutorial ${SDL2_LIB_PATH})
+target_link_libraries(VulkanTutorial Vulkan::Vulkan ${SDL2_LIB_PATH})
 
-# Set up SDL2 include directories. TODO: check it works on non WIN32 platforms
 normalize_path($ENV{VULKAN_SDK}/include/SDL2/ SDL2_INCLUDE_PATH)
 target_include_directories(VulkanTutorial PRIVATE ${SDL2_INCLUDE_PATH})
-
-# Set up SDL2 flags for Windows
-if(WIN32)
-    target_compile_definitions(VulkanTutorial PRIVATE SDL_MAIN_HANDLED)
-endif()
