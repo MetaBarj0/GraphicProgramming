@@ -16,7 +16,8 @@ target_link_libraries(VulkanTutorial Vulkan::Vulkan ${SDL2_LIB_PATH})
 normalize_path($ENV{VULKAN_SDK}/include/SDL2/ SDL2_INCLUDE_PATH)
 target_include_directories(VulkanTutorial PRIVATE ${SDL2_INCLUDE_PATH})
 
-# provide a function to create sanitized target and expose their names
+# provide a function to create sanitized target and expose their names in the
+# specified target properties
 include(../cmake/create_clang_sanitize_targets.cmake)
 
-create_clang_sanitize_targets(VulkanTutorial ${VulkanTutorial_sources} SanitizeTargets)
+create_clang_sanitize_targets(VulkanTutorial ${VulkanTutorial_sources})

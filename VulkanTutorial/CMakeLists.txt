@@ -12,4 +12,4 @@ include(cmake/enforce_default_debug_build_type.cmake)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-subdirs("src")
+subdirs("src" "tests")
