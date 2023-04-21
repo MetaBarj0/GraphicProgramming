@@ -10,6 +10,11 @@ FetchContent_MakeAvailable(Catch2)
 
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 
+include(CTest)
+include(Catch)
+
+set(Tests_sources test.cpp)
+
 # TODO: iterate through all production code targets and create test suites
 # accordingly. There should be one normal production code target and at least
 # one sanitized production code target.
@@ -19,18 +24,13 @@ list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 # `create_clang_sanitize_targets` function call.
 # Below is a very trivial example of one test target you can inspire yourself
 # with. It does not iterate at all but may define what will be inside the loop.
-
-# include(CTest)
-# include(Catch)
-#
-# set(Tests_sources test.cpp)
 #
 # get_property(property TARGET VulkanTutorial PROPERTY SanitizeTargetNames)
 # message("fancy target property: ${property}")
-#
-# add_executable(Tests ${Tests_sources})
-# target_compile_features(Tests PRIVATE cxx_std_23)
-#
-# target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
-#
-# catch_discover_tests(Tests)
+
+add_executable(Tests ${Tests_sources})
+target_compile_features(Tests PRIVATE cxx_std_23)
+
+target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
+
+catch_discover_tests(Tests)
