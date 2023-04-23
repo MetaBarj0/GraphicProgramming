@@ -1,17 +1,4 @@
-Include(FetchContent)
-
-FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.3.2 # or a later release
-)
-
-FetchContent_MakeAvailable(Catch2)
-
-list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
-
-include(CTest)
-include(Catch)
+find_package(Catch2 3.3.2 REQUIRED)
 
 set(Tests_sources test.cpp)
 
@@ -33,4 +20,6 @@ target_compile_features(Tests PRIVATE cxx_std_23)
 
 target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
 
+include(CTest)
+include(Catch)
 catch_discover_tests(Tests)
