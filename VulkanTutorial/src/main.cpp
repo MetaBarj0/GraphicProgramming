@@ -1,5 +1,6 @@
 #define SDL_MAIN_HANDLED
 #include <SDL2/SDL.h>
+#include <vulkan/vulkan.hpp>
 
 auto main( int /*unused*/, char * /*unused*/[] ) -> int
 {
@@ -10,6 +11,13 @@ auto main( int /*unused*/, char * /*unused*/[] ) -> int
   auto *window = SDL_CreateWindow( "VulkanTutorial", SDL_WINDOWPOS_UNDEFINED,
                                    SDL_WINDOWPOS_UNDEFINED, width, height,
                                    SDL_WINDOW_SHOWN | SDL_WINDOW_VULKAN );
+
+  uint32_t extensionCount = 0;
+  vkEnumerateInstanceExtensionProperties( nullptr, &extensionCount, nullptr );
+
+  if( extensionCount == 0 )
+    return 1;
+
   if( window == nullptr )
     return 1;
 
