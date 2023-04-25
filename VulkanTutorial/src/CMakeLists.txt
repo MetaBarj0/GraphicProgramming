@@ -1,4 +1,5 @@
 find_package(Vulkan REQUIRED)
+find_package(fmt REQUIRED)
 
 set(VulkanTutorial_sources "main.cpp")
 
@@ -15,7 +16,7 @@ include(../cmake/create_clang_sanitize_targets.cmake)
 include(../cmake/normalize_path.cmake)
 
 normalize_path($ENV{VULKAN_SDK}/lib/SDL2.lib SDL2_LIB_PATH)
-target_link_libraries(VulkanTutorial Vulkan::Vulkan ${SDL2_LIB_PATH})
+target_link_libraries(VulkanTutorial Vulkan::Vulkan ${SDL2_LIB_PATH} fmt::fmt)
 
 normalize_path($ENV{VULKAN_SDK}/include/SDL2/ SDL2_INCLUDE_PATH)
 target_include_directories(VulkanTutorial PRIVATE ${SDL2_INCLUDE_PATH})
